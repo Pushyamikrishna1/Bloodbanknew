@@ -5,7 +5,8 @@ pipeline {
         stage('Backend Build') {
             steps {
                 dir('backend') {
-                    sh './mvnw clean package -DskipTests'
+                    // CHANGED: sh to bat
+                    bat '.\\mvnw clean package -DskipTests' 
                 }
             }
         }
@@ -13,15 +14,18 @@ pipeline {
         stage('Frontend Build') {
             steps {
                 dir('lifeline-link-22-main') {
-                    sh 'npm install'
-                    sh 'npm run build'
+                    // CHANGED: sh to bat
+                    bat 'npm install'
+                    // CHANGED: sh to bat
+                    bat 'npm run build'
                 }
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'docker-compose build'
+                // CHANGED: sh to bat
+                bat 'docker-compose build'
             }
         }
     }
